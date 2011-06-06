@@ -1,0 +1,46 @@
+<h2>Add/Modify News</h2>
+
+<?php if (!empty($_SESSION['formErrors'])): ?>
+	<div class="error">
+	<?php if (count($_SESSION['formErrors']) > 1):?>
+	<ul>
+	<?php foreach($_SESSION['formErrors'] as $error):?>
+		<li><?php echo $error?></li>
+	<?php endforeach;?>
+	</ul>
+	<?php else: ?>
+		<?php echo $_SESSION['formErrors'][0]?>
+	<?php endif;?>
+	</div>
+	<?php unset($_SESSION['formErrors'])?>
+<?php endif;?>
+
+<form action="/index/save" method="post" >
+<input type="hidden" name="id" value="<?php echo @$oNews->getId()?>" />
+<table>
+	<tr>
+		<td><label>Category</label></td>
+		<td><select name="category">
+		<?php foreach($aoNewsCategories as $oNewsCat):?>
+		<option value="<?php echo $oNewsCat->getId()?>" <?php echo (@$oNews->getWbpNewsCategory()->getId() == $oNewsCat->getId()) ? 'selected' : ''?> ><?php echo $oNewsCat->getName()?></option>
+		<?php endforeach;?>
+		</select></td>
+	</tr>
+	<tr>
+		<td><label>Title</label></td>
+		<td><input type="text" name="title" value="<?php echo @$oNews->getTitle()?>" /></td>
+	</tr>
+	<tr>
+		<td><label>Text</label></td>
+		<td><textarea  name="text" ><?php echo @$oNews->getText()?></textarea></td>
+	</tr>
+</table>
+<p>
+	<button type="submit">
+	    Save
+	</button>
+	<button type="button" onclick="window.location='/index'">
+	  Cancel
+	</button>
+</p>
+</form>

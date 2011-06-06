@@ -1,0 +1,37 @@
+<h2>Login</h2>
+
+<div style="width: 30%; text-align: center;">
+<?php if (!empty($_SESSION['formErrors'])): ?>
+	<div class="error">
+	<?php if (count($_SESSION['formErrors']) > 1):?>
+	<ul>
+	<?php foreach($_SESSION['formErrors'] as $error):?>
+		<li><?php echo $error?></li>
+	<?php endforeach;?>
+	</ul>
+	<?php else: ?>
+		<?php echo $_SESSION['formErrors'][0]?>
+	<?php endif;?>
+	</div>
+	<?php unset($_SESSION['formErrors'])?>
+<?php endif;?>
+
+<form action="/auth/process" method="post" >
+<table>
+	<tr>
+		<td><label>Username</label></td>
+		<td><input type="text" name="username" value="" /></td>
+	</tr>
+	<tr>
+		<td><label>Password</label></td>
+		<td><input type="password" name="password" value="" /></td>
+	</tr>
+</table>
+<p>
+	<button type="submit">
+	    Validate
+	</button>
+	
+</p>
+</form>
+</div>

@@ -1,0 +1,24 @@
+
+
+<h2>News List <a href="/index/form">[add]</a> <a href="/auth/logout">[logout]</a></h2>
+<table>
+<?php if (!empty($aoNews)):?>
+	<tr>
+		<th>Id</th>
+		<th>Category</th>
+		<th>Title</th>
+		<th>&nbsp;</th>
+	</tr>
+
+	<?php foreach($aoNews as $oNews):?>
+	<tr>
+		<td><?php echo $oNews->getId() ?></td>
+		<td><?php echo $oNews->getWbpNewsCategory()->getName() ?></td>
+		<td><a href="/index/show?id=<?php echo $oNews->getId() ?>"><?php echo $oNews->getTitle() ?></a></td>
+		<td><a href="/index/form?id=<?php echo $oNews->getId() ?>">Edit</a> | <a href="/index/delete?id=<?php echo $oNews->getId() ?>">Delete</a></td>
+		
+	</tr>
+	<?php endforeach;?>
+<?php endif;?>
+
+</table>
